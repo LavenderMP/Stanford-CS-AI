@@ -1,0 +1,404 @@
+% This template was designed by Victor Lin (victorlin@cs.stanford.edu) with edits by Lisa Yan.
+% You should compile this with PDFLaTeX (default), not XeLaTeX.
+
+% This is a comment!
+
+% This is the document declaration
+\documentclass[12pt]{article}
+
+% these are some useful packages. these add functionality to your document
+\usepackage{newtxtext} % sets font
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathdots}
+\usepackage[pdftex]{graphicx}
+\usepackage{fancyhdr}
+%\usepackage[margin=1in]{geometry}
+\usepackage{multicol}
+\usepackage{bm}
+\usepackage{listings}
+\PassOptionsToPackage{usenames,dvipsnames}{color}  %% Allow color names
+\usepackage{pdfpages}
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+\usepackage{framed}
+\usepackage[thinlines]{easytable}
+\usepackage{minted}
+\def\code#1{\texttt{#1}} % add some code in-line
+\usepackage{mdframed}
+\usepackage{colortbl}
+\usepackage{makecell}
+\usepackage{amsmath}  % math symbols
+\usepackage{wrapfig}  % in case you want to use a figure
+\usepackage{hyperref} % add hyper links
+
+% This package controls the margins of the page.
+\usepackage[top=1in, bottom=1in, left=0.8in, right=1in]{geometry}
+
+\usepackage{multicol} % in case you want to use multiple columns
+\setlength{\columnsep}{0.1pc}
+
+% document headers!
+\title{CS 109: Probability for Computer Scientists\\Problem Set\#1}
+\author{author} % Change this to your name!
+\date{\today} % today does the right thing
+
+\lhead{author}
+\chead{Problem Set \#1}
+\rhead{\today}
+
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\absfit}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\eval}[3]{\left[#1\right]_{#2}^{#3}}
+\renewcommand{\(}{\left(}
+\renewcommand{\)}{\right)}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\pd}[1]{\frac{\partial}{\partial #1}}
+\newcommand{\inner}[1]{\langle#1\rangle}
+\newcommand{\cond}{\bigg|}
+\newcommand{\rank}[1]{\mathbf{rank}(#1)}
+\newcommand{\range}[1]{\mathbf{range}(#1)}
+\newcommand{\nullsp}[1]{\mathbf{null}(#1)}
+\newcommand{\repr}[1]{\left\langle#1\right\rangle}
+
+\DeclareMathOperator{\Var}{Var}
+\newcommand{\SD}{\operatorname{SD}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{\mathbf{Tr}}
+\DeclareMathOperator{\diag}{\mathbf{diag}}
+\DeclareMathOperator{\dist}{\mathbf{dist}}
+\DeclareMathOperator{\prob}{\mathbf{prob}}
+\DeclareMathOperator{\dom}{\mathbf{dom}}
+\DeclareMathOperator{\E}{\mathbf{E}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+\DeclareMathOperator{\var}{\mathbf{var}}
+\DeclareMathOperator{\quartile}{\mathbf{quartile}}
+\DeclareMathOperator{\conv}{\mathbf{conv}}
+\DeclareMathOperator{\VC}{VC}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\Uni}{\operatorname{Uni}}
+\newcommand{\Ber}{\operatorname{Ber}}
+\newcommand{\Bin}{\operatorname{Bin}}
+\newcommand{\Geo}{\operatorname{Geo}}
+\newcommand{\NegBin}{\operatorname{NegBin}}
+\newcommand{\Zipf}{\operatorname{Zipf}}
+\newcommand{\HypG}{\operatorname{HypG}}
+\newcommand{\Poi}{\operatorname{Poi}}
+\newcommand{\Beta}{\operatorname{Beta}}
+\newcommand{\Normal}{\operatorname{\mathcal{N}}}
+\newcommand{\N}{\operatorname{\mathcal{N}}}
+\newcommand{\Exp}{\operatorname{Exp}}
+\DeclareMathOperator{\NP}{\mathbf{NP}}
+\DeclareMathOperator{\coNP}{\mathbf{coNP}}
+\DeclareMathOperator{\TIME}{\mathsf{TIME}}
+\DeclareMathOperator{\polytime}{\mathbf{P}}
+\DeclareMathOperator{\PH}{\mathbf{PH}}
+\DeclareMathOperator{\SIZE}{\mathbf{SIZE}}
+\DeclareMathOperator{\ATIME}{\mathbf{ATIME}}
+\DeclareMathOperator{\SPACE}{\mathbf{SPACE}}
+\DeclareMathOperator{\ASPACE}{\mathbf{ASPACE}}
+\DeclareMathOperator{\NSPACE}{\mathbf{NSPACE}}
+\DeclareMathOperator{\Z}{\mathbb{Z}}
+\DeclareMathOperator{\EXP}{\mathbf{EXP}}
+\DeclareMathOperator{\NEXP}{\mathbf{NEXP}}
+\DeclareMathOperator{\NTIME}{\mathbf{NTIME}}
+\DeclareMathOperator{\DTIME}{\mathbf{DTIME}}
+\DeclareMathOperator{\poly}{poly}
+\DeclareMathOperator{\BPP}{\mathbf{BPP}}
+\DeclareMathOperator{\ZPP}{\mathbf{ZPP}}
+\DeclareMathOperator{\RP}{\mathbf{RP}}
+\DeclareMathOperator{\coRP}{\mathbf{coRP}}
+\DeclareMathOperator{\BPL}{\mathbf{BPL}}
+\DeclareMathOperator{\IP}{\mathbf{IP}}
+\DeclareMathOperator{\PSPACE}{\mathbf{PSPACE}}
+\DeclareMathOperator{\NPSPACE}{\mathbf{NPSPACE}}
+\DeclareMathOperator{\SAT}{\mathsf{SAT}}
+\DeclareMathOperator{\NL}{\mathbf{NL}}
+\DeclareMathOperator{\PCP}{\mathbf{PCP}}
+\DeclareMathOperator{\PP}{\mathbf{PP}}
+\DeclareMathOperator{\cost}{cost}
+\let\Pr\relax
+\DeclareMathOperator*{\Pr}{\mathbf{Pr}}
+
+\usepackage{booktabs}
+\usepackage{diagbox}
+  % configure display of tables
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\newcommand\tabhead[1]{\small\textbf{#1}}
+
+\theoremstyle{definition}
+\newtheorem*{answer}{Answer}
+
+\definecolor{shadecolor}{gray}{0.95}
+
+\setlength{\parindent}{0pt}
+
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+% begin the document
+\begin{document}
+
+% actually insert the title.
+\maketitle
+
+\begin{enumerate}
+% 1
+\item Introduce yourself! Fill out this Google form to tell me a bit about you:
+\begin{quote}
+\url{https://forms.gle/tRvuhnyXfV1LXX7t5}
+\end{quote}
+
+(No need to copy the answers into your Gradescope submission; you can select an arbitrary page or write ``done'' so there is something to select.)
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 2
+\item 12 computers are brought in for servicing (and machines are serviced one at a time).  Of the 12 computers, 3 are PCs, 5 are Macs, and 4 are Linux machines.  Assume that all computers of the same type are indistinguishable (i.e., all the PCs are indistinguishable, all the Macs are the indistinguishable, etc.).
+    \begin{enumerate}[label=\alph*.]
+
+    \item In how many distinguishable ways can the computers be ordered for servicing?
+    \item In how many distinguishable ways can the computers be ordered if the first 5 machines serviced must include all 4 Linux machines?
+    \item In how many distinguishable ways can the computers be ordered if 1 PC must be in the first 3 and 2 PCs must be in the last 3 computers serviced?
+
+    \end{enumerate}
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 3
+\item At the local zoo, a new exhibit consisting of 3 different species of birds and 3 different species of reptiles is to be formed from a pool of 7 bird species and 5 reptile species. How many exhibits are possible if
+
+\begin{enumerate}[label=\alph*.]
+\item there are no additional restrictions on which species can be selected?
+\item 2 particular bird species cannot be placed together (e.g., they have a predator-prey relationship)?
+\item 1 particular bird species and 1 particular reptile species cannot be placed together?
+
+\end{enumerate}
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 4
+\item A substitution cipher is derived from orderings of the alphabet. How many ways can
+the 26 letters of the English alphabet (21 consonants and 5 vowels) be ordered if each letter appears exactly once and:
+    \begin{enumerate}[label=\alph*.]
+
+    \item There are no other restrictions?
+    \item The letters Q and U must be next to each other (but in any order)?
+    \item All five vowels must be next to each other?
+    \item No two vowels can be next to each other?
+
+    \end{enumerate}
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 5
+\item Given all the start-up activity going on in high-tech, you realize that applying combinatorics to investment strategies might be an interesting idea to pursue.  Say you have \$20 million that must be invested among 4 possible companies.  Each investment must be in integral units of \$1 million, and there are minimal investments that need to be made if one is to invest in these companies.  The minimal investments are \$1, \$2, \$3, and \$4 million dollars, respectively for company 1, 2, 3, and 4.  How many different investment strategies are available if
+    \begin{enumerate}[label=\alph*.]
+
+    \item an investment must be made in each company?
+    \item investments must be made in at least 3 of the 4 companies?
+
+    \end{enumerate}
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 6
+\item How many ways can you split a class of 99 students into 33 project groups of 3 students each? Neither the order of the groups nor the order of students within groups matters.
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 7
+\item You are counting cards in a card game that uses two standard decks of cards. There are 104
+cards total. Each deck has 52 cards (13 values each with 4 suits). Cards are only
+distinguishable based on their suit and value, not which deck they came from.
+    \begin{enumerate}[label=\alph*.]
+
+    \item In how many distinct ways can the cards be ordered?
+    \item You are dealt two cards. How many distinct pairs of cards can you be dealt? Note: the
+order of the two cards you are dealt does not matter.
+
+    \end{enumerate}
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 8
+\item Determine the number of vectors $(x_1, x_2, \dotsc, x_n)$ such that each $x_i$ is a non-negative integer and $\sum_{i=1}^n x_i \leq k$, where $k$ is some constant non-negative integer. Note that you can think of $n$ (the size of the vector) and $k$ as constants that can be used in your answer.
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 9
+\item Consider an array $x$ of integers with $k$ elements (e.g., \texttt{int x[k]}), where each entry in the array has a \underline{distinct} integer value between 1 and $n$, inclusive, and the array is sorted in increasing order. In other words, $1 \leq \texttt{x[i]} \leq n$, for all $i = 0, 1, 2, \dotsc, k - 1$, and the array is sorted, so $\texttt{x[0]} < \texttt{x[1]} < \dotsc < \texttt{x[k-1]}$.  How many such sorted arrays are possible?
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 10
+\item You are running a web site that receives 8 hits (in a particular second of time).  Your web site is powered by 5 computers, and each hit to your web site can be serviced by any one of the 5 computers you have, where each computer is capable of processing as many (or as few) requests as it is given.
+    \begin{enumerate}[label=\alph*.]
+
+    \item In how many distinct ways could the 8 hits to your website be distributed among the 5 computers if all hits are considered identical?
+    \item In how many distinct ways could the 8 hits to your website be distributed among the 5 computers if the hits consisted of 5 identical requests for web page A and 3 identical requests for web page B (note that requests for web page A are distinguishable from requests for web page B)?
+
+    \end{enumerate}
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 11
+\item Say a university is offering 3 programming classes: one in Java, one in C++, and one in Python.  The classes are open to any of the 100 students at the university.  There are:
+    \begin{itemize}
+
+    \item a total of 27 students in the Java class;
+    \item a total of 28 students in the C++ class;
+    \item a total of 19 students in the Python class;
+    \item 12 students in both the Java and C++ classes (note: these students are also counted as being in each class in the numbers above);
+    \item 4 students in both the Java and Python classes;
+    \item 11 students in both the C++ and Python classes; and
+    \item 3 students in all three classes (note: these students are also counted as being in each pair of classes in the numbers above).
+
+    \end{itemize}
+
+    \begin{enumerate}[label=\alph*.]
+
+    \item If a student is chosen randomly at the university, what is the probability that the student is not in any of the 3 programming classes?
+    \item If a student is chosen randomly at the university, what is the probability that the student is taking \emph{exactly one} of the three programming classes?
+    \item If two different students are chosen randomly at the university, what is the probability that at least one of the chosen students is taking at least one of the programming classes?
+
+    \end{enumerate}
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 12
+\item To get good performance when working binary search trees (BST), we must consider the probability of producing completely degenerate BSTs (where each node in the BST has at most one child). See Lecture Notes \# 2, Example 2, for more details on binary search trees.
+    \begin{enumerate}[label=\alph*.]
+
+    \item If the integers 1 through $n$ are inserted in arbitrary order into a BST (where each possible order is equally likely), what is the probability (as an expression in terms of $n$) that the resulting BST will have completely degenerate structure?
+    \item Using your expression from part (a), determine the smallest value of $n$ for which the probability of forming a completely degenerate BST is less than 0.001 (i.e., 0.1\%).
+
+    \end{enumerate}
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 13
+\item Suppose that $m$ strings are hashed (randomly) into $N$ buckets, assuming that all $N^m$ arrangements are equally likely.  Find the probability that exactly $k$ strings are hashed to the first bucket.
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 14
+\item Say a hacker has a list of $n$ distinct password candidates, only one of which will successfully log her into a secure system.
+    \begin{enumerate}[label=\alph*.]
+
+    \item If she tries passwords from the list at random, deleting those passwords that do not work, what is the probability that her first successful login will be (exactly) on her $k$-th try?
+    \item Now say the hacker tries passwords from the list at random, but does \textbf{not} delete previously tried passwords from the list. She stops after her first successful login attempt.  What is the probability that her first successful login will be (exactly) on her $k$-th try?
+
+    \end{enumerate}
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+
+% 15
+\item Say we send out a total of 20 distinguishable emails to 12 distinct users, where each email we send is equally likely to go to any of the 12 users (note that it is possible that some users may not actually receive any email from us).  What is the probability that the 20 emails are distributed such that there are 4 users who receive exactly 2 emails each from us and 3 users who receive exactly 4 emails each from us?
+
+    \begin{shaded}
+    \begin{answer}
+
+    \end{answer}
+    \end{shaded}
+    \newpage
+
+\end{enumerate}
+
+
+\end{document}
